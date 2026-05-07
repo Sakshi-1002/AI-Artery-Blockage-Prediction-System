@@ -1,7 +1,7 @@
 import pandas as pd
 
 # Load dataset
-df = pd.read_csv("../dataset/heart_attack_prediction_dataset.csv")
+df = pd.read_csv("../dataset/heart.csv")
 
 # Display first 5 rows
 print(df.head())
