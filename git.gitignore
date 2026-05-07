@@ -1,0 +1,17 @@
+# Python virtual environment
+ml-engine-python/venv/
+
+# Python cache
+__pycache__/
+
+# STS / Eclipse
+.project
+.classpath
+.settings/
+
+# Java target folder
+target/
+
+# OS files
+.DS_Store
+Thumbs.db
