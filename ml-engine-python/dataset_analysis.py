@@ -27,3 +27,9 @@ numeric_df = df.select_dtypes(include=['int64', 'float64'])
 
 print("\nCorrelation Matrix:")
 print(numeric_df.corr())
+
+# Duplicate rows
+duplicates = df.duplicated().sum()
+
+print("\nDuplicate Rows:")
+print(duplicates)
