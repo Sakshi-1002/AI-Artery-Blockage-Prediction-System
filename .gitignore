@@ -1,0 +1,42 @@
+# Python virtual environment
+ml-engine-python/venv/
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Machine Learning model cache/temp
+*.pyo
+*.pyd
+
+# Java build files
+target/
+
+# STS / Eclipse files
+.project
+.classpath
+.settings/
+
+# VS Code
+.vscode/
+
+# IntelliJ
+.idea/
+
+# Word temporary files
+~$*.docx
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Python virtual environment
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Environment variables
+.env
