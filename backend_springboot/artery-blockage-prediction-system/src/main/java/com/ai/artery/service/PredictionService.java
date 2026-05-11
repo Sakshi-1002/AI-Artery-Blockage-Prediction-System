@@ -14,13 +14,37 @@ public class PredictionService {
 	private FlaskApiClient flaskApiClient;
 	
 	public PredictionResponse predictHeartDisease(
-			PredictionRequest request) {
-		
-		validateRequest(request);
-		
-		PredictionResponse response = flaskApiClient.getPrediction(request);
-		
-		return response;
+	        PredictionRequest request) {
+
+	    validateRequest(request);
+
+	    try {
+
+	        PredictionResponse response =
+	                flaskApiClient.getPrediction(request);
+
+	        if (response == null) {
+	            throw new RuntimeException(
+	                    "No response received from Flask API"
+	            );
+	        }
+
+	        return response;
+
+	    } catch (Exception e) {
+
+	        PredictionResponse errorResponse =
+	                new PredictionResponse();
+
+	        errorResponse.setPrediction(-1);
+	        errorResponse.setConfidence(0.0);
+	        errorResponse.setRisk_level("ERROR");
+	        errorResponse.setMessage(
+	                "Backend error: " + e.getMessage()
+	        );
+
+	        return errorResponse;
+	    }
 	}
 	
 	public void validateRequest(PredictionRequest request) {
