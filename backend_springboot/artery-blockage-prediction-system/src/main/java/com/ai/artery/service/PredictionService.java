@@ -6,12 +6,17 @@ import org.springframework.stereotype.Service;
 import com.ai.artery.client.FlaskApiClient;
 import com.ai.artery.dto.PredictionRequest;
 import com.ai.artery.dto.PredictionResponse;
+import com.ai.artery.model.PredictionResult;
+import com.ai.artery.repository.PredictionResultRepository;
 
 @Service
 public class PredictionService {
 	
 	@Autowired
 	private FlaskApiClient flaskApiClient;
+	
+	@Autowired
+	private PredictionResultRepository repository;
 	
 	public PredictionResponse predictHeartDisease(
 	        PredictionRequest request) {
@@ -28,6 +33,18 @@ public class PredictionService {
 	                    "No response received from Flask API"
 	            );
 	        }
+	        
+	        PredictionResult result = new PredictionResult();
+	        
+	        result.setAge(request.getAge());
+	        result.setSex(request.getSex());
+	        result.setChol(request.getChol());
+	        result.setPrediction(response.getPrediction());
+	        result.setConfidence(response.getConfidence());
+	        result.setRiskLevel(response.getRisk_level());
+	        result.setPredictionTime(java.time.LocalDateTime.now());
+	        
+	        repository.save(result);
 
 	        return response;
 
