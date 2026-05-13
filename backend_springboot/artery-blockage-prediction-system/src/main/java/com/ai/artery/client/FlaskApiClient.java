@@ -1,5 +1,6 @@
 package com.ai.artery.client;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -12,7 +13,8 @@ import com.ai.artery.dto.PredictionResponse;
 @Component
 public class FlaskApiClient {
 	
-	private final String FLASK_API_URL = "http://127.0.0.1:5000/predict";
+	@Value("${flask.api.url")
+	private String flaskApiUrl;
 	
 	public PredictionResponse getPrediction(PredictionRequest request) {
 		
@@ -23,7 +25,7 @@ public class FlaskApiClient {
 		
 		HttpEntity<PredictionRequest> entity = new HttpEntity<>(request, headers);
 		
-		PredictionResponse response = restTemplate.postForObject(FLASK_API_URL, entity, PredictionResponse.class);
+		PredictionResponse response = restTemplate.postForObject(flaskApiUrl, entity, PredictionResponse.class);
 		
 		return response;
 	}
