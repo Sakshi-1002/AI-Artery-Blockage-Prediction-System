@@ -45,7 +45,7 @@ def predict():
         probabillity = model.predict_proba(features)[0][1]
 
         # Risk label
-        risk_level = "High Risk" if prediction == 1 else "Low Risk"
+        risk_level = "High Risk" if prediction == 0 else "Low Risk"
 
         #JSON response
         response = {

@@ -11,7 +11,7 @@ public class PredictionRequest {
 	private int restecg;
 	private int thalach;
 	private int exang;
-	private int oldpeak;
+	private double oldpeak;
 	private int slope;
 	private int ca;
 	private int thal;
@@ -92,11 +92,11 @@ public class PredictionRequest {
 		this.exang = exang;
 	}
 
-	public int getOldpeak() {
+	public double getOldpeak() {
 		return oldpeak;
 	}
 
-	public void setOldpeak(int oldpeak) {
+	public void setOldpeak(double oldpeak) {
 		this.oldpeak = oldpeak;
 	}
 

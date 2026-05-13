@@ -19,7 +19,7 @@ public class PredictionController {
 	@Autowired
 	private PredictionService predictionService;
 	
-	@PostMapping("/predict")
+	@PostMapping("/api/predict")
 	public PredictionResponse predictHeartDiesease(
 			@RequestBody PredictionRequest request) {
 		
