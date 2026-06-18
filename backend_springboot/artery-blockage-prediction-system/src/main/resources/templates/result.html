@@ -9,57 +9,283 @@
           content="width=device-width, initial-scale=1.0">
 
     <title>
-        Prediction Result
+        Prediction Result Dashboard
     </title>
+
+    <!-- Bootstrap -->
 
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
         rel="stylesheet">
 
+    <!-- Bootstrap Icons -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <style>
+
+        body {
+
+            background: #f4f9ff;
+            font-family: Arial, sans-serif;
+        }
+
+        .result-card {
+
+            border: none;
+            border-radius: 25px;
+        }
+
+        .dashboard-title {
+
+            font-weight: bold;
+            color: #0d6efd;
+        }
+
+        .risk-box {
+
+            border-radius: 20px;
+            padding: 25px;
+        }
+
+        .risk-high {
+
+            background-color: #ffe5e5;
+            color: #dc3545;
+        }
+
+        .risk-low {
+
+            background-color: #e7f7ed;
+            color: #198754;
+        }
+
+        .metric-card {
+
+            border-radius: 20px;
+            border: none;
+        }
+
+        .metric-icon {
+
+            font-size: 2.5rem;
+            color: #0d6efd;
+        }
+
+    </style>
+
 </head>
 
 <body>
 
-<div class="container mt-5">
+<!-- Navbar -->
 
-    <div class="card shadow p-5 text-center">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow">
 
-        <h1 class="mb-4">
+    <div class="container">
 
-            Prediction Result
+        <a class="navbar-brand fw-bold"
+           href="/">
 
-        </h1>
-
-        <h2 class="mb-3">
-
-            Risk Level:
-            <span th:text="${riskLevel}"></span>
-
-        </h2>
-
-        <h4 class="mb-3">
-
-            Confidence Score:
-            <span th:text="${confidence}"></span>
-
-        </h4>
-
-        <p class="lead">
-
-            <span th:text="${message}"></span>
-
-        </p>
-
-        <a href="/predict-page"
-           class="btn btn-primary mt-4">
-
-            Predict Again
+            AI Artery Prediction
 
         </a>
+
+        <div>
+
+            <a href="/predict-page"
+               class="btn btn-light">
+
+                New Prediction
+
+            </a>
+
+        </div>
+
+    </div>
+
+</nav>
+
+<!-- Dashboard -->
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-10">
+
+            <div class="card result-card shadow-lg p-5">
+
+                <!-- Header -->
+
+                <div class="text-center mb-5">
+
+                    <i class="bi bi-clipboard2-pulse-fill"
+                       style="font-size: 4rem;
+                              color: #0d6efd;">
+                    </i>
+
+                    <h1 class="dashboard-title mt-3">
+
+                        AI Prediction Analysis Report
+
+                    </h1>
+
+                    <p class="text-muted mt-3">
+
+                        Machine Learning based cardiovascular
+                        risk analysis generated successfully.
+
+                    </p>
+
+                </div>
+
+                <!-- Risk Status -->
+
+                <div class="text-center mb-5">
+
+                    <div class="risk-box"
+                         th:classappend="${riskLevel == 'High Risk'} ?
+                         ' risk-high' : ' risk-low'">
+
+                        <h2>
+
+                            Risk Status
+
+                        </h2>
+
+                        <h1 class="fw-bold mt-3"
+                            th:text="${riskLevel}">
+
+                        </h1>
+
+                    </div>
+
+                </div>
+
+                <!-- Metrics -->
+
+                <div class="row g-4">
+
+                    <div class="col-md-4">
+
+                        <div class="card metric-card shadow p-4 text-center h-100">
+
+                            <i class="bi bi-bar-chart-fill metric-icon"></i>
+
+                            <h4 class="mt-3">
+
+                                Confidence Score
+
+                            </h4>
+
+                            <h2 class="fw-bold text-primary"
+                                th:text="${confidence}">
+
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-4">
+
+                        <div class="card metric-card shadow p-4 text-center h-100">
+
+                            <i class="bi bi-heart-pulse-fill metric-icon"></i>
+
+                            <h4 class="mt-3">
+
+                                AI Status
+
+                            </h4>
+
+                            <h2 class="fw-bold text-success">
+
+                                Completed
+
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-4">
+
+                        <div class="card metric-card shadow p-4 text-center h-100">
+
+                            <i class="bi bi-database-fill metric-icon"></i>
+
+                            <h4 class="mt-3">
+
+                                Database Record
+
+                            </h4>
+
+                            <h2 class="fw-bold text-primary">
+
+                                Saved
+
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Analysis Message -->
+
+                <div class="card shadow border-0 mt-5 p-4">
+
+                    <h3 class="text-primary">
+
+                        Prediction Summary
+
+                    </h3>
+
+                    <p class="lead mt-3"
+                       th:text="${message}">
+
+                    </p>
+
+                </div>
+
+                <!-- Buttons -->
+
+                <div class="text-center mt-5">
+
+                    <a href="/predict-page"
+                       class="btn btn-primary btn-lg me-3">
+
+                        Predict Again
+
+                    </a>
+
+                    <a href="/"
+                       class="btn btn-outline-primary btn-lg">
+
+                        Back to Home
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
 
     </div>
 
 </div>
+
+<!-- Bootstrap JS -->
+
+<script
+src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
 
 </body>
 </html>
