@@ -252,6 +252,24 @@
                     </p>
 
                 </div>
+				
+				<div class="card shadow border-0 mt-4 p-4">
+
+				    <h3 class="text-success">
+
+				        Personalized AI Recommendations
+
+				    </h3>
+
+				    <ul class="mt-3">
+
+				        <li th:each="recommendation : ${recommendations}"
+				            th:text="${recommendation}">
+				        </li>
+
+				    </ul>
+
+				</div>
 
                 <!-- Buttons -->
 
@@ -263,6 +281,15 @@
                         Predict Again
 
                     </a>
+					
+					<a th:href="@{/download-report(
+					        riskLevel=${riskLevel},
+					        confidence=${confidence})}"
+					   class="btn btn-success btn-lg me-3">
+
+					    Download PDF Report
+
+					</a>
 
                     <a href="/"
                        class="btn btn-outline-primary btn-lg">

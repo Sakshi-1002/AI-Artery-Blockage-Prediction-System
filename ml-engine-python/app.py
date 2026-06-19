@@ -42,17 +42,27 @@ def predict():
         prediction = model.predict(features)[0]
 
         # Prediction probabillity
-        probabillity = model.predict_proba(features)[0][1]
+        probabillity = model.predict_proba(features)[0][0]
+
+        print("Prediction:", prediction)
+        print("Probability:", probabillity)
 
         # Risk label
-        risk_level = "High Risk" if prediction == 0 else "Low Risk"
+        if probabillity >= 0.60:
+            risk_level = "High Risk"
+
+        elif probabillity >= 0.35:
+            risk_level = "Moderate Risk"
+
+        else:
+            risk_level = "Low Risk"
 
         #JSON response
         response = {
-            "prediction" : int(prediction),
-            "risk_level" : risk_level,
-            "confidence" : round(float(probabillity), 4),
-            "message" : "Prediction generated successfully"
+            "prediction": int(prediction),
+            "risk_level": risk_level,
+            "confidence": round(float(probabillity), 4),
+            "message": f"Patient classified as {risk_level}"
         }
 
         return jsonify(response)
@@ -65,3 +75,4 @@ def predict():
 # Run Flask server
 if __name__ == "__main__":
     app.run(debug=True)
+
